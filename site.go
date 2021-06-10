@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 )
 
 type Page struct {
@@ -29,10 +30,17 @@ func viewHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Println(err.Error())
 	}
-	fmt.Fprintf(w, "%s", p.Body)
+	_,err = fmt.Fprintf(w, "%s", p.Body)
+	if err != nil {
+		log.Fatal(err.Error())
+	}
 }
 
 func main() {
 	http.HandleFunc("/", viewHandler)
-	log.Fatal(http.ListenAndServe(":8080",nil))
+	if os.Getenv("PORT") != "" {
+		log.Fatal(http.ListenAndServe(":" + os.Getenv("PORT"), nil))
+	} else {
+		log.Fatal(http.ListenAndServe(":8080", nil))
+	}
 }
