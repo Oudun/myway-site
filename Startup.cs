@@ -10,8 +10,6 @@ public static class Startup
     {
         var builder = WebApplication.CreateBuilder(new WebApplicationOptions
         {
-            ApplicationName = typeof(Program).Assembly.FullName,
-            ContentRootPath = Path.GetFullPath(Directory.GetCurrentDirectory()),
             WebRootPath = "static",
             Args = args
         });
