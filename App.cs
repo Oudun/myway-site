@@ -1,8 +1,8 @@
 using dotenv.net;
-using MyWay;
+using static MyWay.Startup;
 
 DotEnv.Load();
-var builder = Startup.CreateWebBuilder(args);
+var builder = CreateWebBuilder(args);
 var app = builder.Build();
 app.ConfigurePipeline();
 app.Run();
